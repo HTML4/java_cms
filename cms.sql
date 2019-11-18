@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50711
 File Encoding         : 65001
 
-Date: 2019-11-15 16:25:59
+Date: 2019-11-18 16:20:37
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -31,10 +31,6 @@ CREATE TABLE `tb_ad` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of tb_ad
--- ----------------------------
-
--- ----------------------------
 -- Table structure for tb_ad_item
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_ad_item`;
@@ -48,10 +44,6 @@ CREATE TABLE `tb_ad_item` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `ad_id_index` (`ad_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of tb_ad_item
--- ----------------------------
 
 -- ----------------------------
 -- Table structure for tb_artcle
@@ -73,10 +65,6 @@ CREATE TABLE `tb_artcle` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of tb_artcle
--- ----------------------------
-
--- ----------------------------
 -- Table structure for tb_basic_info
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_basic_info`;
@@ -91,10 +79,6 @@ CREATE TABLE `tb_basic_info` (
   `copyright` varchar(200) NOT NULL COMMENT '网站版权',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of tb_basic_info
--- ----------------------------
 
 -- ----------------------------
 -- Table structure for tb_category
@@ -112,8 +96,22 @@ CREATE TABLE `tb_category` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of tb_category
+-- Table structure for tb_comment
 -- ----------------------------
+DROP TABLE IF EXISTS `tb_comment`;
+CREATE TABLE `tb_comment` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '评论id',
+  `parent_id` int(11) DEFAULT NULL COMMENT '预留字段 可以对评论的回复',
+  `user_id` int(11) NOT NULL COMMENT '用户id',
+  `artcle_id` int(11) NOT NULL COMMENT '文章id',
+  `status` tinyint(1) DEFAULT '0' COMMENT '状态 0-待审核 1-启用 2-关闭',
+  `detail` varchar(300) DEFAULT NULL COMMENT '评论详情',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `update_time` datetime DEFAULT NULL COMMENT '修改事件',
+  PRIMARY KEY (`id`),
+  KEY `user_id_index` (`user_id`),
+  KEY `artcle_id_index` (`artcle_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for tb_user
@@ -130,7 +128,3 @@ CREATE TABLE `tb_user` (
   `update_time` datetime DEFAULT NULL COMMENT '修改事件',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of tb_user
--- ----------------------------

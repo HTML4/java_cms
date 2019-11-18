@@ -9,10 +9,6 @@ public class User {
 
     private String password;
 
-    private String email;
-
-    private String phone;
-
     private String question;
 
     private String answer;
@@ -23,12 +19,10 @@ public class User {
 
     private Date updateTime;
 
-    public User(Integer id, String username, String password, String email, String phone, String question, String answer, Integer role, Date createTime, Date updateTime) {
+    public User(Integer id, String username, String password, String question, String answer, Integer role, Date createTime, Date updateTime) {
         this.id = id;
         this.username = username;
         this.password = password;
-        this.email = email;
-        this.phone = phone;
         this.question = question;
         this.answer = answer;
         this.role = role;
@@ -62,22 +56,6 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password == null ? null : password.trim();
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email == null ? null : email.trim();
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone == null ? null : phone.trim();
     }
 
     public String getQuestion() {
