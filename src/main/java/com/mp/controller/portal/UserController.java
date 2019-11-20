@@ -55,6 +55,9 @@ public class UserController {
     @ResponseBody
     public ServerResponse<String> resetPassword(HttpSession session, String oldPassword, String newPassword) {
         User user = (User) session.getAttribute(Const.currentUser);
+        if(user == null) {
+            return ServerResponse.createByErrorMessage("用户未登录");
+        }
         return userService.resetPassword(user, oldPassword, newPassword);
     }
 }

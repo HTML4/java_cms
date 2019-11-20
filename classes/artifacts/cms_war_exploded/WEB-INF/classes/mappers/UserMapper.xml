@@ -137,10 +137,7 @@
 
   <select id="selectLogin" parameterType="map" resultMap="BaseResultMap">
     select
-    id,
-    username,
-    create_time,
-    role
+    <include refid="Base_Column_List"></include>
     from tb_user
     where username = #{username} and password = #{password}
   </select>

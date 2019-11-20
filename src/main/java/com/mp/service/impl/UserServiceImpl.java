@@ -7,6 +7,8 @@ import com.mp.entity.User;
 import com.mp.service.UserService;
 import com.mp.util.MD5Util;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,7 @@ import java.util.Date;
 
 @Service
 public class UserServiceImpl implements UserService {
+    private static Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
     @Autowired
     private UserMapper userMapper;
     public ServerResponse<String> register(User user) {
@@ -47,6 +50,7 @@ public class UserServiceImpl implements UserService {
         if(user == null) {
             return ServerResponse.createByErrorMessage("密码错误");
         }
+        user.setPassword(null);
         return ServerResponse.createBySuccess("登录成功", user);
     }
 
@@ -58,7 +62,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public ServerResponse<String> selectQuestion(String username) {
         ServerResponse validResponse = this.checkValid(username);
-        if(!validResponse.isSuccess()) {
+        if(validResponse.getStatus() != -1) {
             return validResponse;
         }
         String question = userMapper.selectQuestionByUsername(username);
@@ -78,10 +82,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public ServerResponse<String> forgetResetPassword(String username, String newPassword, String question, String answer) {
         ServerResponse validResponse = this.checkValid(username);
-        if(!validResponse.isSuccess()) {
+        if(validResponse.getStatus() != -1) {
             return validResponse;
         }
         int userId = userMapper.selectIdByUsernameQustionAnswer(username, question, answer);
+        logger.info("id为：", userId);
         if(userId == 0) {
             return ServerResponse.createByErrorMessage("问题答案错误");
         }
@@ -129,7 +134,7 @@ public class UserServiceImpl implements UserService {
         if(StringUtils.isNotBlank(username)) {
             int resultCount = userMapper.checkUsername(username);
             if(resultCount > 0) {
-                return ServerResponse.createByErrorMessage("用户名已存在");
+                return ServerResponse.createByErrorCodeMessage(-1, "用户名已存在");
             }
         } else {
             return ServerResponse.createByErrorMessage("参数错误");
