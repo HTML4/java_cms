@@ -18,6 +18,15 @@
             <param-value>true</param-value>
         </init-param>
     </filter>
+    <filter>
+        <filter-name>corsfilter</filter-name>
+        <filter-class>com.mp.filter.CorsFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>corsfilter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>
     <filter-mapping>
         <filter-name>characterEncodingFilter</filter-name>
         <url-pattern>/*</url-pattern>

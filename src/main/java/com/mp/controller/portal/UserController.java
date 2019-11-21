@@ -4,13 +4,13 @@ import com.mp.common.Const;
 import com.mp.common.ServerResponse;
 import com.mp.entity.User;
 import com.mp.service.UserService;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -27,10 +27,14 @@ public class UserController {
 
     @RequestMapping(value = "login.do", method = RequestMethod.POST)
     @ResponseBody
-    public ServerResponse<String> login(HttpSession session, String username, String password){
+    public ServerResponse<String> login(HttpSession session, String username, String password, HttpServletRequest request){
+
         ServerResponse response = userService.login(username, password);
         if(response.isSuccess()) {
-            session.setAttribute(Const.currentUser, response.getData());
+            session.setAttribute(Const.CURRENT_USER, response.getData());
+            System.out.println(session.getId());
+            System.out.println(request.getSession().getId());
+            System.out.println(session.getAttribute(Const.CURRENT_USER));
         }
         return response;
     }
@@ -38,8 +42,19 @@ public class UserController {
     @RequestMapping(value = "logout.do", method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<String> logout(HttpSession session) {
-        session.removeAttribute(Const.currentUser);
+        session.removeAttribute(Const.CURRENT_USER);
         return ServerResponse.createBySuccessMessage("退出登录成功");
+    }
+    @RequestMapping(value = "get_user_info.do")
+    @ResponseBody
+    public ServerResponse<User> getUserInfo(HttpSession session) {
+        System.out.println(session.getId());
+        System.out.println(session.getAttribute(Const.CURRENT_USER));
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        if(user != null) {
+            return ServerResponse.createBySuccess(user);
+        }
+        return ServerResponse.createByErrorMessage("用户未登录, 无法获取当前用户的信息");
     }
     @RequestMapping(value = "getQuestion.do")
     @ResponseBody
@@ -54,7 +69,7 @@ public class UserController {
     @RequestMapping(value = "resetPassword.do")
     @ResponseBody
     public ServerResponse<String> resetPassword(HttpSession session, String oldPassword, String newPassword) {
-        User user = (User) session.getAttribute(Const.currentUser);
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
         if(user == null) {
             return ServerResponse.createByErrorMessage("用户未登录");
         }
