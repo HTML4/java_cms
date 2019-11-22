@@ -62,7 +62,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public ServerResponse<String> selectQuestion(String username) {
         ServerResponse validResponse = this.checkValid(username);
-        if(validResponse.getStatus() != -1) {
+        if(validResponse.getcode() != -1) {
             return validResponse;
         }
         String question = userMapper.selectQuestionByUsername(username);
@@ -82,7 +82,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public ServerResponse<String> forgetResetPassword(String username, String newPassword, String question, String answer) {
         ServerResponse validResponse = this.checkValid(username);
-        if(validResponse.getStatus() != -1) {
+        if(validResponse.getcode() != -1) {
             return validResponse;
         }
         int userId = userMapper.selectIdByUsernameQustionAnswer(username, question, answer);

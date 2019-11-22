@@ -28,13 +28,9 @@ public class UserController {
     @RequestMapping(value = "login.do", method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<String> login(HttpSession session, String username, String password, HttpServletRequest request){
-
         ServerResponse response = userService.login(username, password);
         if(response.isSuccess()) {
             session.setAttribute(Const.CURRENT_USER, response.getData());
-            System.out.println(session.getId());
-            System.out.println(request.getSession().getId());
-            System.out.println(session.getAttribute(Const.CURRENT_USER));
         }
         return response;
     }
@@ -48,8 +44,6 @@ public class UserController {
     @RequestMapping(value = "get_user_info.do")
     @ResponseBody
     public ServerResponse<User> getUserInfo(HttpSession session) {
-        System.out.println(session.getId());
-        System.out.println(session.getAttribute(Const.CURRENT_USER));
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if(user != null) {
             return ServerResponse.createBySuccess(user);

@@ -36,7 +36,6 @@ public class CorsFilter implements Filter {
             if (REQUEST_OPTIONS.equalsIgnoreCase(request.getMethod())) {
                 return;
             }
-            System.out.println("0.0");
         }
         filterChain.doFilter(request, response);
     }
