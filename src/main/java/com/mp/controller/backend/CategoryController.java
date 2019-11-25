@@ -3,6 +3,7 @@ package com.mp.controller.backend;
 import com.mp.common.ServerResponse;
 import com.mp.entity.Category;
 import com.mp.service.CategoryService;
+import com.mp.vo.CategoryTreeVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,9 +17,22 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
-    @RequestMapping("getCategoryList.do")
+    @RequestMapping("getList.do")
     @ResponseBody
-    public ServerResponse<List<Category>> getCategoryList(){
+    public ServerResponse<List<CategoryTreeVo>> getCategoryList(){
         return categoryService.selectCategory();
+    }
+    @RequestMapping("addOrUpdate.do")
+    @ResponseBody
+    public ServerResponse<String> addOrUpdate(Category category){
+        if(category.getId() == null) {
+            return categoryService.addCategory(category);
+        }
+        return categoryService.updateCategory(category);
+    }
+    @RequestMapping("delete.do")
+    @ResponseBody
+    public ServerResponse<String> delete(Integer id){
+        return categoryService.deleteCategory(id);
     }
 }
