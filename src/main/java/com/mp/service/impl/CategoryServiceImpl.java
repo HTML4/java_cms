@@ -34,6 +34,7 @@ public class CategoryServiceImpl implements CategoryService {
         newCategory.setName(category.getName());
         newCategory.setCreateTime(new Date());
         newCategory.setParentId(category.getParentId());
+        newCategory.setStatus(category.getStatus());
 
         int resultCount = categoryMapper.insertSelective(newCategory);
         if(resultCount == 0) {
