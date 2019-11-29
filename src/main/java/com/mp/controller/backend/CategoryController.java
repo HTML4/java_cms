@@ -20,7 +20,7 @@ public class CategoryController {
     @RequestMapping("getList.do")
     @ResponseBody
     public ServerResponse<List<CategoryTreeVo>> getCategoryList(){
-        return categoryService.selectCategory();
+        return categoryService.selectCategoryList();
     }
     @RequestMapping("addOrUpdate.do")
     @ResponseBody
@@ -34,5 +34,10 @@ public class CategoryController {
     @ResponseBody
     public ServerResponse<String> delete(Integer id){
         return categoryService.deleteCategory(id);
+    }
+    @RequestMapping("getDetail.do")
+    @ResponseBody
+    public ServerResponse<Category> getDetail(Integer id){
+        return categoryService.selectCategory(id);
     }
 }

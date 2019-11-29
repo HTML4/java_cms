@@ -90,10 +90,24 @@ public class CategoryServiceImpl implements CategoryService {
      * 获取分类列表
      * @return
      */
-    public ServerResponse<List<CategoryTreeVo>> selectCategory() {
+    public ServerResponse<List<CategoryTreeVo>> selectCategoryList() {
         List<Category> categoryList = categoryMapper.selectCategory();
         List<CategoryTreeVo> categoryTreeVoList = buildByRecursive(categoryList);
         return ServerResponse.createBySuccess(categoryTreeVoList);
+    }
+
+    /**
+     * 获取分类详情
+     * @param id
+     * @return
+     */
+    @Override
+    public ServerResponse<Category> selectCategory(Integer id) {
+        if(id == null) {
+            return ServerResponse.createByErrorMessage("id不能为空");
+        }
+        Category category = categoryMapper.selectByPrimaryKey(id);
+        return ServerResponse.createBySuccess(category);
     }
 
     /**

@@ -8,7 +8,13 @@ import java.util.List;
 
 public interface CategoryService {
     ServerResponse<String> addCategory(Category category);
+
     ServerResponse<String> updateCategory(Category category);
+
     ServerResponse<String> deleteCategory(Integer id);
-    ServerResponse<List<CategoryTreeVo>> selectCategory();
+
+    ServerResponse<List<CategoryTreeVo>> selectCategoryList();
+
+    ServerResponse<Category> selectCategory(Integer id);
+
 }

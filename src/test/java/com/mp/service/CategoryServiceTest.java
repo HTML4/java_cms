@@ -29,7 +29,7 @@ public class CategoryServiceTest extends BaseTest {
     }
     @Test
     public void selectCategoryTest(){
-        ServerResponse response = categoryService.selectCategory();
+        ServerResponse response = categoryService.selectCategoryList();
         System.out.println(response.getData());
     }
 }
