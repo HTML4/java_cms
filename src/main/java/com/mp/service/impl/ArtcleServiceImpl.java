@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class ArtcleServiceImpl implements ArtcleService {
@@ -30,5 +31,25 @@ public class ArtcleServiceImpl implements ArtcleService {
             return ServerResponse.createByErrorMessage("添加失败");
         }
         return ServerResponse.createBySuccessMessage("添加成功");
+    }
+
+    @Override
+    public ServerResponse<String> deleteArtcle(Integer id) {
+        return null;
+    }
+
+    @Override
+    public ServerResponse<String> updateArtcle(Artcle artcle) {
+        return null;
+    }
+
+    @Override
+    public ServerResponse<List<Artcle>> selectArtcleList() {
+        return null;
+    }
+
+    @Override
+    public ServerResponse<Artcle> selectArtcle(Integer id) {
+        return null;
     }
 }
