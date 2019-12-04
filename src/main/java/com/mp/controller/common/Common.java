@@ -1,4 +1,4 @@
-package com.mp.controller.portal;
+package com.mp.controller.common;
 
 import com.google.common.collect.Maps;
 import com.mp.common.ServerResponse;

@@ -50,6 +50,15 @@
     </bean>
     <!-- 4.扫描web相关的bean -->
     <context:component-scan base-package="com.mp.controller" />
+    <!-- SPringmvc的拦截器 -->
+    <mvc:interceptors>
+        <!-- 多个拦截器 -->
+        <mvc:interceptor>
+            <mvc:mapping path="/**/**/a/**"/>
+            <!-- 自定义的拦截器类 -->
+            <bean class="com.mp.interceptor.InterceptorLogin"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
     <!-- 5.权限拦截器 -->
     <!--    <mvc:interceptors>-->
     <!--        <mvc:interceptor>-->

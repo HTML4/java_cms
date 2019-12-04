@@ -1,6 +1,7 @@
 package com.mp.controller.backend;
 
 import com.mp.common.ServerResponse;
+import com.mp.controller.common.BaseController;
 import com.mp.entity.Category;
 import com.mp.service.CategoryService;
 import com.mp.vo.CategoryTreeVo;
@@ -12,8 +13,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 
 @Controller
-@RequestMapping("/admin/category")
-public class CategoryController {
+@RequestMapping("/category")
+public class CategoryController extends BaseController {
     @Autowired
     private CategoryService categoryService;
 
@@ -22,7 +23,7 @@ public class CategoryController {
     public ServerResponse<List<CategoryTreeVo>> getCategoryList(){
         return categoryService.selectCategoryList();
     }
-    @RequestMapping("addOrUpdate.do")
+    @RequestMapping("${adminPath}/addOrUpdate.do")
     @ResponseBody
     public ServerResponse<String> addOrUpdate(Category category){
         if(category.getId() == null) {
@@ -30,7 +31,7 @@ public class CategoryController {
         }
         return categoryService.updateCategory(category);
     }
-    @RequestMapping("delete.do")
+    @RequestMapping("${adminPath}/delete.do")
     @ResponseBody
     public ServerResponse<String> delete(Integer id){
         return categoryService.deleteCategory(id);
