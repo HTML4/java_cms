@@ -107,6 +107,9 @@ public class CategoryServiceImpl implements CategoryService {
             return ServerResponse.createByErrorMessage("id不能为空");
         }
         Category category = categoryMapper.selectByPrimaryKey(id);
+        if(category == null) {
+            return ServerResponse.createByErrorMessage("该id查不到分类");
+        }
         return ServerResponse.createBySuccess(category);
     }
 

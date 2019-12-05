@@ -35,21 +35,41 @@ public class ArtcleServiceImpl implements ArtcleService {
 
     @Override
     public ServerResponse<String> deleteArtcle(Integer id) {
-        return null;
+        if(id == null) {
+            return ServerResponse.createByErrorMessage("id不能为空");
+        }
+        int resultCount = artcleMapper.deleteByPrimaryKey(id);
+        if(resultCount == 0) {
+            return ServerResponse.createByErrorMessage("删除失败");
+        }
+        return ServerResponse.createBySuccessMessage("删除成功");
     }
 
     @Override
     public ServerResponse<String> updateArtcle(Artcle artcle) {
-        return null;
+        if (artcle == null || artcle.getId() == null) {
+            return ServerResponse.createByErrorMessage("id不能为空");
+        }
+        artcle.setUpdateTime(new Date());
+        int resultCount = artcleMapper.updateByPrimaryKeySelective(artcle);
+        if(resultCount == 0) {
+            return ServerResponse.createByErrorMessage("修改失败");
+        }
+        return ServerResponse.createBySuccessMessage("修改成功");
     }
 
     @Override
     public ServerResponse<List<Artcle>> selectArtcleList() {
-        return null;
+        List<Artcle> artcleList = artcleMapper.selectArtcleList();
+        return ServerResponse.createBySuccess(artcleList);
     }
 
     @Override
     public ServerResponse<Artcle> selectArtcle(Integer id) {
-        return null;
+        if(id == null) {
+            return ServerResponse.createByErrorMessage("id不能为空");
+        }
+        Artcle artcle = artcleMapper.selectByPrimaryKey(id);
+        return ServerResponse.createBySuccess(artcle);
     }
 }
