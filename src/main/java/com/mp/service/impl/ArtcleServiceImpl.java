@@ -70,6 +70,9 @@ public class ArtcleServiceImpl implements ArtcleService {
             return ServerResponse.createByErrorMessage("id不能为空");
         }
         Artcle artcle = artcleMapper.selectByPrimaryKey(id);
+        if(artcle == null) {
+            return ServerResponse.createByErrorMessage("文章不存在");
+        }
         return ServerResponse.createBySuccess(artcle);
     }
 }

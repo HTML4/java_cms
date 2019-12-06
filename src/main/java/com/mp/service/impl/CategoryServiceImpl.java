@@ -108,7 +108,7 @@ public class CategoryServiceImpl implements CategoryService {
         }
         Category category = categoryMapper.selectByPrimaryKey(id);
         if(category == null) {
-            return ServerResponse.createByErrorMessage("该id查不到分类");
+            return ServerResponse.createByErrorMessage("分类不存在");
         }
         return ServerResponse.createBySuccess(category);
     }

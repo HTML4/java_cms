@@ -154,7 +154,7 @@
 
   <select id="selectArtcleList" resultType="map">
     select
-    id, category_id, author, title, desc, thumbnail, status, create_time, update_time
+    id, category_id, author, title, "desc", thumbnail, status, create_time, update_time
     from tb_artcle
   </select>
 </mapper>
