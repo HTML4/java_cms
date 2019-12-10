@@ -26,28 +26,32 @@ public class FTPUtil {
         this.user = user;
         this.pwd = pwd;
     }
-    public static boolean uploadFile(List<File> fileList) throws IOException {
+    public static boolean uploadFile(List<File> fileList, String remotePath) throws IOException {
         FTPUtil ftpUtil = new FTPUtil(ftpIp, 21, ftpUser, ftpPass);
         logger.info("开始连接ftp服务器");
-        boolean result = ftpUtil.uploadFile("img", fileList);
-        logger.info("开始连接ftp服务器,结束上传,上传结果:{}");
+        boolean result = ftpUtil.uploadFile(remotePath, fileList);
+        logger.info("开始连接ftp服务器,结束上传,上传结果:{}", result);
         return result;
     }
     private boolean uploadFile(String remotePath, List<File> fileList) throws IOException {
         boolean uploaded = true;
         FileInputStream fis = null;
         //链接FTP服务器
+
         if(connectServer(this.ip, this.port, this.user, this.pwd)) {
             try {
-                ftpClient.changeWorkingDirectory(remotePath);       //切换文件夹
-                ftpClient.setBufferSize(1024);                      //缓冲
-                ftpClient.setControlEncoding("UTF-8");
-                ftpClient.setFileType(ftpClient.BINARY_FILE_TYPE);  //二进制
-                ftpClient.enterLocalPassiveMode();
-                for (File fileItem: fileList) {
-                    fis = new FileInputStream(fileItem);
-                    ftpClient.storeFile(fileItem.getName(), fis);
+                //创建并切换到该文件夹
+                if(isCreateDirectory(ftpClient, remotePath)) {
+                    ftpClient.setBufferSize(1024);                      //缓冲
+                    ftpClient.setControlEncoding("UTF-8");
+                    ftpClient.setFileType(ftpClient.BINARY_FILE_TYPE);  //二进制
+                    ftpClient.enterLocalPassiveMode();
+                    for (File fileItem: fileList) {
+                        fis = new FileInputStream(fileItem);
+                        ftpClient.storeFile(fileItem.getName(), fis);
+                    }
                 }
+
             } catch (IOException e) {
                 logger.error("上传文件异常", e);
                 uploaded = false;
@@ -59,6 +63,32 @@ public class FTPUtil {
             }
         }
         return  uploaded;
+    }
+
+    /**
+     * 判断是否需要创建文件夹 并且 切换到文件夹
+     * @param ftpClient
+     * @param remotePath
+     * @return
+     */
+    private static boolean isCreateDirectory(FTPClient ftpClient, String remotePath) {
+        boolean bool = false;
+        try {
+            //切换文件夹
+            if(!ftpClient.changeWorkingDirectory(remotePath)) {
+                //创建文件夹
+                if(ftpClient.makeDirectory(remotePath)) {
+                    if(!ftpClient.changeWorkingDirectory(remotePath)) {
+                        return false;
+                    }
+                }
+            }
+            bool = true;
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            return bool;
+        }
     }
     private boolean connectServer(String ip, int port, String user, String pwd){
         boolean isSuccess = false;

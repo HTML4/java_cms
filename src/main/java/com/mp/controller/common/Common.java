@@ -1,5 +1,6 @@
 package com.mp.controller.common;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.mp.common.ServerResponse;
 import com.mp.service.IFileService;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -22,13 +23,34 @@ public class Common {
     private IFileService iFileService;
     @ResponseBody
     @RequestMapping("upload.do")
-    public ServerResponse upload(HttpSession session, @RequestParam(value = "upload_file", required = false) MultipartFile file, HttpServletRequest request) {
+    public ServerResponse upload(HttpServletRequest request,
+                                 @RequestParam(value = "upload_file", required = false) MultipartFile file,
+                                 @RequestParam(value = "remotePath", required = false, defaultValue = "file") String remotePath) {
         String path = request.getSession().getServletContext().getRealPath("upload");
-        String targetName = iFileService.upload(file, path);
-        String url = PropertiesUtil.getProperty("ftp.server.http.prefix") + targetName;
+        String targetName = iFileService.upload(file, path, remotePath);
+        String url = PropertiesUtil.getProperty("ftp.server.http.prefix") + remotePath + "/" + targetName;
         Map fileMap = Maps.newHashMap();
         fileMap.put("name", targetName);
         fileMap.put("url", url);
         return ServerResponse.createBySuccess(fileMap);
+    }
+    @ResponseBody
+    @RequestMapping("upload_edit.do")
+    public Map uploadEdit(HttpServletRequest request,
+                          @RequestParam(value = "upload_file", required = false) MultipartFile file,
+                          @RequestParam(value = "remotePath", required = false, defaultValue = "file") String remotePath) {
+        String path = request.getSession().getServletContext().getRealPath("upload");
+        String targetName = iFileService.upload(file, path, remotePath);
+        String url = PropertiesUtil.getProperty("ftp.server.http.prefix") + remotePath + "/" + targetName;
+        Map fileMap = Maps.newHashMap();
+        List<String> data = Lists.newArrayList();
+        if(targetName == null) {
+            fileMap.put("errno", 1);
+        } else {
+            fileMap.put("errno", 0);
+            data.add(url);
+            fileMap.put("data", data);
+        }
+        return fileMap;
     }
 }

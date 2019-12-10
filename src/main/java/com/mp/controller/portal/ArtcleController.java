@@ -1,6 +1,7 @@
 package com.mp.controller.portal;
 
 import com.mp.common.ServerResponse;
+import com.mp.controller.common.BaseController;
 import com.mp.entity.Artcle;
 import com.mp.service.ArtcleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("artcle")
-public class ArtcleController {
+public class ArtcleController extends BaseController {
     @Autowired
     private ArtcleService artcleService;
 
@@ -20,5 +21,14 @@ public class ArtcleController {
     @ResponseBody
     public ServerResponse<List<Artcle>> getArtcleList(){
         return artcleService.selectArtcleList();
+    }
+
+    @RequestMapping("${adminPath}/addOrUpdate.do")
+    @ResponseBody
+    public ServerResponse<String> addOrUpdate(Artcle artcle){
+        if(artcle.getId() == null) {
+            return artcleService.addArtcle(artcle);
+        }
+        return artcleService.updateArtcle(artcle);
     }
 }
