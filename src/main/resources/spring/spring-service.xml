@@ -12,6 +12,8 @@
     <!-- 扫描service包下所有使用注解的类型 -->
     <context:component-scan base-package="com.mp.service" />
 
+    <!-- 加载配置属性文件 -->
+    <context:property-placeholder ignore-unresolvable="true" location="classpath*: mp.properties" />
     <!-- 配置事务管理器 -->
     <bean id="transactionManager"
           class="org.springframework.jdbc.datasource.DataSourceTransactionManager">

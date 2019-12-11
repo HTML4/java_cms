@@ -20,6 +20,7 @@ public class ArtcleController extends BaseController {
     @RequestMapping("getList.do")
     @ResponseBody
     public ServerResponse<List<Artcle>> getArtcleList(){
+        System.out.println(adminPath);
         return artcleService.selectArtcleList();
     }
 

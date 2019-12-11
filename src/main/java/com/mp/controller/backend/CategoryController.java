@@ -1,7 +1,6 @@
 package com.mp.controller.backend;
 
 import com.mp.common.ServerResponse;
-import com.mp.controller.common.BaseController;
 import com.mp.entity.Category;
 import com.mp.service.CategoryService;
 import com.mp.vo.CategoryTreeVo;
@@ -14,7 +13,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/category")
-public class CategoryController extends BaseController {
+public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
