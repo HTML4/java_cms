@@ -11,7 +11,7 @@ public class Comment {
 
     private Integer artcleId;
 
-    private Boolean status;
+    private Integer status;
 
     private String detail;
 
@@ -19,7 +19,7 @@ public class Comment {
 
     private Date updateTime;
 
-    public Comment(Integer id, Integer parentId, Integer userId, Integer artcleId, Boolean status, String detail, Date createTime, Date updateTime) {
+    public Comment(Integer id, Integer parentId, Integer userId, Integer artcleId, Integer status, String detail, Date createTime, Date updateTime) {
         this.id = id;
         this.parentId = parentId;
         this.userId = userId;
@@ -66,11 +66,11 @@ public class Comment {
         this.artcleId = artcleId;
     }
 
-    public Boolean getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(Boolean status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 

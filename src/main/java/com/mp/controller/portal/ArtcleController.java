@@ -13,18 +13,23 @@ import java.util.List;
 
 @Controller
 @RequestMapping("artcle")
-public class ArtcleController extends BaseController {
+public class ArtcleController {
     @Autowired
     private ArtcleService artcleService;
 
     @RequestMapping("getList.do")
     @ResponseBody
     public ServerResponse<List<Artcle>> getArtcleList(){
-        System.out.println(adminPath);
         return artcleService.selectArtcleList();
     }
 
-    @RequestMapping("${adminPath}/addOrUpdate.do")
+    @RequestMapping("getDetail.do")
+    @ResponseBody
+    public ServerResponse<Artcle> getArtcleDetail(Integer id){
+        return artcleService.selectArtcle(id);
+    }
+
+    @RequestMapping("a/addOrUpdate.do")
     @ResponseBody
     public ServerResponse<String> addOrUpdate(Artcle artcle){
         if(artcle.getId() == null) {

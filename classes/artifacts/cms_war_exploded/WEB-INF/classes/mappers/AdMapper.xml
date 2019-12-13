@@ -5,7 +5,7 @@
     <constructor >
       <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="name" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="status" jdbcType="BIT" javaType="java.lang.Boolean" />
+      <arg column="status" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="new_window" jdbcType="BIT" javaType="java.lang.Boolean" />
       <arg column="remarks" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
@@ -29,7 +29,7 @@
     insert into tb_ad (id, name, status, 
       new_window, remarks, create_time, 
       update_time)
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{status,jdbcType=BIT}, 
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER},
       #{newWindow,jdbcType=BIT}, #{remarks,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
       #{updateTime,jdbcType=TIMESTAMP})
   </insert>
@@ -66,7 +66,7 @@
         #{name,jdbcType=VARCHAR},
       </if>
       <if test="status != null" >
-        #{status,jdbcType=BIT},
+        #{status,jdbcType=INTEGER},
       </if>
       <if test="newWindow != null" >
         #{newWindow,jdbcType=BIT},
@@ -89,7 +89,7 @@
         name = #{name,jdbcType=VARCHAR},
       </if>
       <if test="status != null" >
-        status = #{status,jdbcType=BIT},
+        status = #{status,jdbcType=INTEGER},
       </if>
       <if test="newWindow != null" >
         new_window = #{newWindow,jdbcType=BIT},
@@ -109,7 +109,7 @@
   <update id="updateByPrimaryKey" parameterType="com.mp.entity.Ad" >
     update tb_ad
     set name = #{name,jdbcType=VARCHAR},
-      status = #{status,jdbcType=BIT},
+      status = #{status,jdbcType=INTEGER},
       new_window = #{newWindow,jdbcType=BIT},
       remarks = #{remarks,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},

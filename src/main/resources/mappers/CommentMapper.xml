@@ -7,7 +7,7 @@
       <arg column="parent_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="artcle_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="status" jdbcType="BIT" javaType="java.lang.Boolean" />
+      <arg column="status" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="detail" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
       <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
@@ -31,7 +31,7 @@
       artcle_id, status, detail, 
       create_time, update_time)
     values (#{id,jdbcType=INTEGER}, #{parentId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
-      #{artcleId,jdbcType=INTEGER}, #{status,jdbcType=BIT}, #{detail,jdbcType=VARCHAR}, 
+      #{artcleId,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{detail,jdbcType=VARCHAR},
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.mp.entity.Comment" >
@@ -76,7 +76,7 @@
         #{artcleId,jdbcType=INTEGER},
       </if>
       <if test="status != null" >
-        #{status,jdbcType=BIT},
+        #{status,jdbcType=INTEGER},
       </if>
       <if test="detail != null" >
         #{detail,jdbcType=VARCHAR},
@@ -102,7 +102,7 @@
         artcle_id = #{artcleId,jdbcType=INTEGER},
       </if>
       <if test="status != null" >
-        status = #{status,jdbcType=BIT},
+        status = #{status,jdbcType=INTEGER},
       </if>
       <if test="detail != null" >
         detail = #{detail,jdbcType=VARCHAR},
@@ -121,7 +121,7 @@
     set parent_id = #{parentId,jdbcType=INTEGER},
       user_id = #{userId,jdbcType=INTEGER},
       artcle_id = #{artcleId,jdbcType=INTEGER},
-      status = #{status,jdbcType=BIT},
+      status = #{status,jdbcType=INTEGER},
       detail = #{detail,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP}

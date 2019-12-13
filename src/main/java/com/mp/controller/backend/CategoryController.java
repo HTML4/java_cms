@@ -22,7 +22,7 @@ public class CategoryController {
     public ServerResponse<List<CategoryTreeVo>> getCategoryList(){
         return categoryService.selectCategoryList();
     }
-    @RequestMapping("${adminPath}/addOrUpdate.do")
+    @RequestMapping("a/addOrUpdate.do")
     @ResponseBody
     public ServerResponse<String> addOrUpdate(Category category){
         if(category.getId() == null) {
@@ -30,7 +30,7 @@ public class CategoryController {
         }
         return categoryService.updateCategory(category);
     }
-    @RequestMapping("${adminPath}/delete.do")
+    @RequestMapping("a/delete.do")
     @ResponseBody
     public ServerResponse<String> delete(Integer id){
         return categoryService.deleteCategory(id);

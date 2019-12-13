@@ -7,7 +7,7 @@ public class Ad {
 
     private String name;
 
-    private Boolean status;
+    private Integer status;
 
     private Boolean newWindow;
 
@@ -17,7 +17,7 @@ public class Ad {
 
     private Date updateTime;
 
-    public Ad(Integer id, String name, Boolean status, Boolean newWindow, String remarks, Date createTime, Date updateTime) {
+    public Ad(Integer id, String name, Integer status, Boolean newWindow, String remarks, Date createTime, Date updateTime) {
         this.id = id;
         this.name = name;
         this.status = status;
@@ -47,11 +47,11 @@ public class Ad {
         this.name = name == null ? null : name.trim();
     }
 
-    public Boolean getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(Boolean status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 

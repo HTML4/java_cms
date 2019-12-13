@@ -1,7 +1,10 @@
 package com.mp.entity;
 
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
 import java.util.Date;
 
+@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
 public class Artcle {
     private Integer id;
 
@@ -11,27 +14,30 @@ public class Artcle {
 
     private String title;
 
-    private String desc;
+    private String description;
 
     private String thumbnail;
 
     private String content;
 
-    private Boolean status;
+    private Integer status;
+
+    private Integer pageViews;
 
     private Date createTime;
 
     private Date updateTime;
 
-    public Artcle(Integer id, Integer categoryId, String author, String title, String desc, String thumbnail, String content, Boolean status, Date createTime, Date updateTime) {
+    public Artcle(Integer id, Integer categoryId, String author, String title, String description, String thumbnail, String content, Integer status, Integer pageViews, Date createTime, Date updateTime) {
         this.id = id;
         this.categoryId = categoryId;
         this.author = author;
         this.title = title;
-        this.desc = desc;
+        this.description = description;
         this.thumbnail = thumbnail;
         this.content = content;
         this.status = status;
+        this.pageViews = pageViews;
         this.createTime = createTime;
         this.updateTime = updateTime;
     }
@@ -72,12 +78,12 @@ public class Artcle {
         this.title = title == null ? null : title.trim();
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc == null ? null : desc.trim();
+    public void setDescription(String description) {
+        this.description = description == null ? null : description.trim();
     }
 
     public String getThumbnail() {
@@ -96,12 +102,18 @@ public class Artcle {
         this.content = content == null ? null : content.trim();
     }
 
-    public Boolean getStatus() {
-        return status;
+    public Integer getStatus() { return status; }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
-    public void setStatus(Boolean status) {
-        this.status = status;
+    public Integer getPageViews() {
+        return pageViews;
+    }
+
+    public void setPageViews(Integer pageViews) {
+        this.pageViews = pageViews;
     }
 
     public Date getCreateTime() {

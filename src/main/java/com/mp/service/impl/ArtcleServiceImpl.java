@@ -26,6 +26,7 @@ public class ArtcleServiceImpl implements ArtcleService {
             return ServerResponse.createByErrorMessage("内容不能为空");
         }
         artcle.setCreateTime(new Date());
+        artcle.setUpdateTime(new Date());
         int resultCount = artcleMapper.insertSelective(artcle);
         if(resultCount == 0) {
             return ServerResponse.createByErrorMessage("添加失败");
