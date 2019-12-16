@@ -1,6 +1,7 @@
 package com.mp.dao;
 
 import com.mp.entity.Artcle;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -17,5 +18,5 @@ public interface ArtcleMapper {
 
     int updateByPrimaryKey(Artcle record);
 
-    List<Artcle> selectArtcleList();
+    List<Artcle> selectArtcleList(@Param(value = "categoryId") Integer categoryId);
 }

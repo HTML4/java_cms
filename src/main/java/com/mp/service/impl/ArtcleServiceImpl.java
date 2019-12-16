@@ -1,5 +1,7 @@
 package com.mp.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.mp.common.ServerResponse;
 import com.mp.dao.ArtcleMapper;
 import com.mp.entity.Artcle;
@@ -60,9 +62,11 @@ public class ArtcleServiceImpl implements ArtcleService {
     }
 
     @Override
-    public ServerResponse<List<Artcle>> selectArtcleList() {
-        List<Artcle> artcleList = artcleMapper.selectArtcleList();
-        return ServerResponse.createBySuccess(artcleList);
+    public ServerResponse<PageInfo> selectArtcleList(int pageNum, int pageSize, Integer categoryId) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<Artcle> artcleList = artcleMapper.selectArtcleList(categoryId);
+        PageInfo pageResult = new PageInfo(artcleList);
+        return ServerResponse.createBySuccess(pageResult);
     }
 
     @Override

@@ -163,9 +163,14 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
-  <select id="selectArtcleList" resultType="com.mp.entity.Artcle">
+  <select id="selectArtcleList" resultType="com.mp.entity.Artcle" parameterType="java.lang.Integer">
     select
     id, category_id, author, title, description, thumbnail, status, page_views, create_time, update_time
     from tb_artcle
+    <where>
+        <if test="categoryId != null">
+          and category_id = #{categoryId}
+        </if>
+    </where>
   </select>
 </mapper>

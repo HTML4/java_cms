@@ -1,9 +1,9 @@
 package com.mp.service;
 
+import com.github.pagehelper.PageInfo;
 import com.mp.common.ServerResponse;
 import com.mp.entity.Artcle;
 
-import java.util.List;
 
 public interface ArtcleService {
     ServerResponse<String> addArtcle(Artcle artcle);
@@ -12,7 +12,7 @@ public interface ArtcleService {
 
     ServerResponse<String> updateArtcle(Artcle artcle);
 
-    ServerResponse<List<Artcle>> selectArtcleList();
+    ServerResponse<PageInfo> selectArtcleList(int pageNum, int pageSize, Integer categoryId);
 
     ServerResponse<Artcle> selectArtcle(Integer id);
 }
