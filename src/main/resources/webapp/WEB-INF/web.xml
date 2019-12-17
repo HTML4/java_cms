@@ -53,12 +53,15 @@
         <load-on-startup>1</load-on-startup>
     </servlet>
 
-
+    <!--配置默认首页地址-->
+    <welcome-file-list>
+        <welcome-file>index</welcome-file>
+    </welcome-file-list>
 
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>
         <!--默认匹配.do的请求-->
-        <url-pattern>*.do</url-pattern>
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

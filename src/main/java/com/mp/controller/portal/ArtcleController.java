@@ -17,7 +17,7 @@ public class ArtcleController {
     @Autowired
     private ArtcleService artcleService;
 
-    @RequestMapping("getList.do")
+    @RequestMapping("getArtcleList.do")
     @ResponseBody
     public ServerResponse<PageInfo> getArtcleList(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
                                                   @RequestParam(value = "pageSize", defaultValue = "10") int pageSize,
@@ -25,18 +25,24 @@ public class ArtcleController {
         return artcleService.selectArtcleList(pageNum, pageSize, categoryId);
     }
 
-    @RequestMapping("getDetail.do")
+    @RequestMapping("getArtcleDetail.do")
     @ResponseBody
     public ServerResponse<Artcle> getArtcleDetail(Integer id){
         return artcleService.selectArtcle(id);
     }
 
-    @RequestMapping("a/addOrUpdate.do")
+    @RequestMapping("a/addOrUpdateArtcle.do")
     @ResponseBody
     public ServerResponse<String> addOrUpdate(Artcle artcle){
         if(artcle.getId() == null) {
             return artcleService.addArtcle(artcle);
         }
         return artcleService.updateArtcle(artcle);
+    }
+
+    @RequestMapping("a/deleteArtcle.do")
+    @ResponseBody
+    public ServerResponse<String> delete(Integer id){
+        return artcleService.deleteArtcle(id);
     }
 }
