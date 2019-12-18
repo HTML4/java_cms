@@ -12,7 +12,7 @@ public interface ArtcleMapper {
 
     int insertSelective(Artcle record);
 
-    Artcle selectByPrimaryKey(Integer id);
+    Artcle selectByPrimaryKey(@Param(value = "id") Integer id, @Param(value = "categoryId") Integer categoryId);
 
     int updateByPrimaryKeySelective(Artcle record);
 

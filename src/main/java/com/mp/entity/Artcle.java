@@ -20,6 +20,8 @@ public class Artcle {
 
     private String content;
 
+    private Integer contentModel;
+
     private Integer status;
 
     private Integer pageViews;
@@ -28,7 +30,7 @@ public class Artcle {
 
     private Date updateTime;
 
-    public Artcle(Integer id, Integer categoryId, String author, String title, String description, String thumbnail, String content, Integer status, Integer pageViews, Date createTime, Date updateTime) {
+    public Artcle(Integer id, Integer categoryId, String author, String title, String description, String thumbnail, String content, Integer contentModel, Integer status, Integer pageViews, Date createTime, Date updateTime) {
         this.id = id;
         this.categoryId = categoryId;
         this.author = author;
@@ -36,6 +38,7 @@ public class Artcle {
         this.description = description;
         this.thumbnail = thumbnail;
         this.content = content;
+        this.contentModel = contentModel;
         this.status = status;
         this.pageViews = pageViews;
         this.createTime = createTime;
@@ -100,6 +103,14 @@ public class Artcle {
 
     public void setContent(String content) {
         this.content = content == null ? null : content.trim();
+    }
+
+    public Integer getContentModel() {
+        return contentModel;
+    }
+
+    public void setContentModel(Integer contentModel) {
+        this.contentModel = contentModel;
     }
 
     public Integer getStatus() { return status; }

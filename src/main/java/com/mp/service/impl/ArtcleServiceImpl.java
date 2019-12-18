@@ -70,11 +70,11 @@ public class ArtcleServiceImpl implements ArtcleService {
     }
 
     @Override
-    public ServerResponse<Artcle> selectArtcle(Integer id) {
-        if(id == null) {
-            return ServerResponse.createByErrorMessage("id不能为空");
+    public ServerResponse<Artcle> selectArtcle(Integer id, Integer categoryId) {
+        if(id == null && categoryId == null) {
+            return ServerResponse.createByErrorMessage("文章id和栏目id不能同同时为空");
         }
-        Artcle artcle = artcleMapper.selectByPrimaryKey(id);
+        Artcle artcle = artcleMapper.selectByPrimaryKey(id, categoryId);
         if(artcle == null) {
             return ServerResponse.createByErrorMessage("文章不存在");
         }

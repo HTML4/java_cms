@@ -27,8 +27,9 @@ public class ArtcleController {
 
     @RequestMapping("getArtcleDetail.do")
     @ResponseBody
-    public ServerResponse<Artcle> getArtcleDetail(Integer id){
-        return artcleService.selectArtcle(id);
+    public ServerResponse<Artcle> getArtcleDetail(@RequestParam(value = "id", required = false) Integer id,
+                                                  @RequestParam(value = "categoryId", required = false) Integer categoryId){
+        return artcleService.selectArtcle(id, categoryId);
     }
 
     @RequestMapping("a/addOrUpdateArtcle.do")

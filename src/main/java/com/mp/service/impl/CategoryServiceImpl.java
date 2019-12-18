@@ -159,6 +159,7 @@ public class CategoryServiceImpl implements CategoryService {
         parentCategory.setName(category.getName());
         parentCategory.setParentId(category.getParentId());
         parentCategory.setStatus(category.getStatus());
+        parentCategory.setContentModel(category.getContentModel());
         parentCategory.setSort(category.getSort());
         parentCategory.setCreateTime(category.getCreateTime());
         parentCategory.setUpdateTime(category.getUpdateTime());

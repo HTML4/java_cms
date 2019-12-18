@@ -14,5 +14,5 @@ public interface ArtcleService {
 
     ServerResponse<PageInfo> selectArtcleList(int pageNum, int pageSize, Integer categoryId);
 
-    ServerResponse<Artcle> selectArtcle(Integer id);
+    ServerResponse<Artcle> selectArtcle(Integer id, Integer categoryId);
 }

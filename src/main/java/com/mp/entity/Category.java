@@ -11,17 +11,20 @@ public class Category {
 
     private Integer status;
 
+    private Integer contentModel;
+
     private Integer sort;
 
     private Date createTime;
 
     private Date updateTime;
 
-    public Category(Integer id, Integer parentId, String name, Integer status, Integer sort, Date createTime, Date updateTime) {
+    public Category(Integer id, Integer parentId, String name, Integer status, Integer contentModel, Integer sort, Date createTime, Date updateTime) {
         this.id = id;
         this.parentId = parentId;
         this.name = name;
         this.status = status;
+        this.contentModel = contentModel;
         this.sort = sort;
         this.createTime = createTime;
         this.updateTime = updateTime;
@@ -61,6 +64,14 @@ public class Category {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public Integer getContentModel() {
+        return contentModel;
+    }
+
+    public void setContentModel(Integer contentModel) {
+        this.contentModel = contentModel;
     }
 
     public Integer getSort() {
