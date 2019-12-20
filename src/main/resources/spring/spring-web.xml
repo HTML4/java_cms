@@ -15,7 +15,7 @@
     <mvc:annotation-driven />
 
     <!-- 2.静态资源默认servlet配置 (1)加入对静态资源的处理：js,gif,png (2)允许使用"/"做整体映射 -->
-    <mvc:resources mapping="/resources/**" location="/resources/" />
+    <mvc:resources mapping="/static/**" location="/static/" />
     <mvc:default-servlet-handler />
 
     <!-- 3.定义视图解析器 -->
@@ -59,6 +59,8 @@
             <bean class="com.mp.interceptor.InterceptorLogin"/>
         </mvc:interceptor>
     </mvc:interceptors>
+    <!-- 静态资源映射 -->
+<!--    <mvc:resources mapping="/static/**" location="/static/" cache-period="31536000"/>-->
     <!-- 5.权限拦截器 -->
     <!--    <mvc:interceptors>-->
     <!--        <mvc:interceptor>-->

@@ -19,4 +19,6 @@ public interface ArtcleMapper {
     int updateByPrimaryKey(Artcle record);
 
     List<Artcle> selectArtcleList(@Param(value = "categoryId") Integer categoryId);
+
+    List<Artcle> selectArtcleListByPage(@Param(value = "categoryId") Integer categoryId, @Param(value = "pageNum") int pageNum, @Param(value = "pageSize") int pageSize);
 }

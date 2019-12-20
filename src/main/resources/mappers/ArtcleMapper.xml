@@ -28,6 +28,7 @@
       <if test="id != null">and id = #{id}</if>
       <if test="categoryId != null">and category_id = #{categoryId}</if>
     </where>
+    limit 1
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from tb_artcle
@@ -185,5 +186,13 @@
           and category_id = #{categoryId}
         </if>
     </where>
+  </select>
+
+  <select id="selectArtcleListByPage" resultType="com.mp.entity.Artcle" parameterType="map">
+    select
+    id, category_id, author, title, description, thumbnail, content_model, status, page_views, create_time, update_time
+    from tb_artcle
+    where category_id = #{categoryId}
+    limit #{pageNum}, #{pageSize}
   </select>
 </mapper>
