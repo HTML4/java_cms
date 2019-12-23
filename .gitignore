@@ -9,6 +9,7 @@
 
 #maven ignore
 target/
+classes/
 
 #out
 out/
