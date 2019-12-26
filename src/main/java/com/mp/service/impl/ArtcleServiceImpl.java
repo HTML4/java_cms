@@ -80,4 +80,11 @@ public class ArtcleServiceImpl implements ArtcleService {
         }
         return ServerResponse.createBySuccess(artcle);
     }
+
+    @Override
+    public List<Artcle> selectArtcleListByPage(int pageNum, int pageSize, Integer categoryId) {
+        int num = (pageNum - 1) * 10;
+        int size = pageSize * pageNum;
+        return artcleMapper.selectArtcleListByPage(num, size, categoryId);
+    }
 }

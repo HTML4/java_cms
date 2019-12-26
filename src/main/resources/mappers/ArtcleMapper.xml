@@ -185,6 +185,7 @@
         <if test="categoryId != null">
           and category_id = #{categoryId}
         </if>
+        and content_model != 1
     </where>
   </select>
 

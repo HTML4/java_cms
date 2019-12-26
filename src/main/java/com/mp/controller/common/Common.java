@@ -28,10 +28,11 @@ public class Common {
                                  @RequestParam(value = "remotePath", required = false, defaultValue = "file") String remotePath) {
         String path = request.getSession().getServletContext().getRealPath("upload");
         String targetName = iFileService.upload(file, path, remotePath);
-        String url = PropertiesUtil.getProperty("ftp.server.http.prefix") + remotePath + "/" + targetName;
+        String uri = "/" + remotePath + "/" + targetName;
+//        String url = PropertiesUtil.getProperty("ftp.server.http.prefix") + uri;
         Map fileMap = Maps.newHashMap();
         fileMap.put("name", targetName);
-        fileMap.put("url", url);
+        fileMap.put("url", uri);
         return ServerResponse.createBySuccess(fileMap);
     }
     @ResponseBody
@@ -41,14 +42,15 @@ public class Common {
                           @RequestParam(value = "remotePath", required = false, defaultValue = "file") String remotePath) {
         String path = request.getSession().getServletContext().getRealPath("upload");
         String targetName = iFileService.upload(file, path, remotePath);
-        String url = PropertiesUtil.getProperty("ftp.server.http.prefix") + remotePath + "/" + targetName;
+        String uri = "/"+ remotePath + "/" + targetName;
+//        String url = PropertiesUtil.getProperty("ftp.server.http.prefix") + uri;
         Map fileMap = Maps.newHashMap();
         List<String> data = Lists.newArrayList();
         if(targetName == null) {
             fileMap.put("errno", 1);
         } else {
             fileMap.put("errno", 0);
-            data.add(url);
+            data.add(uri);
             fileMap.put("data", data);
         }
         return fileMap;

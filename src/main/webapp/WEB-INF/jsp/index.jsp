@@ -9,6 +9,9 @@
                                 <div class="carousel-item">
                                     <div class="carousel-img"><a href="" ><img src="${ctxStatic}/skin/img/_banner.jpg" height="500" alt="{$field.title}" /></a></div>
                                 </div>
+                                <div class="carousel-item">
+                                    <div class="carousel-img"><a href="" ><img src="${ctxStatic}/skin/img/_banner.jpg" height="500" alt="{$field.title}" /></a></div>
+                                </div>
                             </div>
                             <div class="carousel-btn carousel-btn-fixed" id="carousel-page-332510"></div>
                         </div>
@@ -70,7 +73,7 @@
                                         <c:forEach items="${productList}" var="product">
                                             <li class="col-4-1 {eyou:eq name='$mod' value='0'}last{/eyou:eq} not-animated" data-animate="fadeInUp">
                                                 <div class="product-item">
-                                                    <div class="portfolio-img"><a href="{$field.arcurl}"><img src="" alt="{$field.title}" /></a></div>
+                                                    <div class="portfolio-img"><a href="{$field.arcurl}"><img src="${ctxImg}${product.thumbnail}" alt="{$field.title}" /></a></div>
                                                     <div class="portfolio-title">
                                                         <h2><a href="{$field.arcurl}">${product.title}</a></h2>
                                                     </div>
